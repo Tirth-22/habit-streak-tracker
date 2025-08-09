@@ -1,14 +1,9 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
 import model.HabitLog;
 
 public class HabitLogDAO {
@@ -30,18 +25,6 @@ public class HabitLogDAO {
             return false;
         }
     }
-    public boolean deleteLogsForHabit(int habitId) {
-    String sql = "DELETE FROM habit_log WHERE habit_id = ?";
-    try (Connection conn = DBConnection.getConnection();
-         PreparedStatement stmt = conn.prepareStatement(sql)) {
-        stmt.setInt(1, habitId);
-        stmt.executeUpdate();
-        return true;
-    } catch (SQLException e) {
-        System.err.println("Error deleting logs: " + e.getMessage());
-        return false;
-    }
-}
 
     private boolean isAlreadyMarked(int habitId, LocalDate date) {
         String sql = "SELECT COUNT(*) FROM habit_log WHERE habit_id = ? AND log_date = ?";
