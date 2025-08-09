@@ -1,15 +1,9 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
 import model.Habit;
 
 public class HabitDAO {
@@ -29,19 +23,6 @@ public class HabitDAO {
             return false;
         }
     }
-
-    public boolean deleteHabit(int habitId) {
-    String sql = "DELETE FROM habits WHERE id = ?";
-    try (Connection conn = DBConnection.getConnection();
-         PreparedStatement stmt = conn.prepareStatement(sql)) {
-        stmt.setInt(1, habitId);
-        return stmt.executeUpdate() > 0;
-    } catch (SQLException e) {
-        System.err.println("Error deleting habit: " + e.getMessage());
-        return false;
-    }
-}
-
 
     public List<Habit> getAllHabits() {
         List<Habit> habits = new ArrayList<>();
@@ -64,4 +45,21 @@ public class HabitDAO {
 
         return habits;
     }
+    public boolean markHabitDone(int habitId, LocalDate date) {
+    String sql = "INSERT INTO habit_log (habit_id, log_date) VALUES (?, ?)";
+
+    try (Connection conn = DBConnection.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        stmt.setInt(1, habitId);
+        stmt.setDate(2, Date.valueOf(date));
+        int rows = stmt.executeUpdate();
+        return rows > 0;
+
+    } catch (SQLException e) {
+        System.err.println("Error marking habit as done: " + e.getMessage());
+        return false;
+    }
+}
+
 }
