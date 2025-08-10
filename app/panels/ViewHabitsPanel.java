@@ -13,7 +13,7 @@ public class ViewHabitsPanel extends JPanel {
         setLayout(new BorderLayout(10, 10));
         setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 
-        JLabel title = new JLabel("📜 View All Habits");
+        JLabel title = new JLabel("View All Habits");
         title.setFont(new Font("Segoe UI", Font.BOLD, 18));
         add(title, BorderLayout.NORTH);
 
@@ -26,7 +26,7 @@ public class ViewHabitsPanel extends JPanel {
     }
 
     public void refresh() {
-        StringBuilder sb = new StringBuilder("<h3>📋 Your Habits</h3><ul>");
+        StringBuilder sb = new StringBuilder("<h3>Your Habits</h3><ul>");
         for (Habit h : habitDAO.getAllHabits()) {
             sb.append("<li><b>").append(h.getId()).append("</b>: ").append(h.getName()).append("</li>");
         }

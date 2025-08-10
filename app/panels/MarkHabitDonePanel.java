@@ -14,7 +14,7 @@ public class MarkHabitDonePanel extends JPanel {
         setLayout(new BorderLayout(10, 10));
         setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 
-        JLabel title = new JLabel("✅ Mark Habit as Done");
+        JLabel title = new JLabel("Mark Habit as Done");
         title.setFont(new Font("Segoe UI", Font.BOLD, 18));
         add(title, BorderLayout.NORTH);
 
@@ -30,13 +30,11 @@ public class MarkHabitDonePanel extends JPanel {
 
         add(formPanel, BorderLayout.CENTER);
 
-        // Output area
         outputPane = new JTextPane();
         outputPane.setContentType("text/html");
         outputPane.setEditable(false);
         add(new JScrollPane(outputPane), BorderLayout.SOUTH);
 
-        // Button action
         markBtn.addActionListener(e -> markHabitAsDone());
     }
 
@@ -46,10 +44,10 @@ public class MarkHabitDonePanel extends JPanel {
             try {
                 int id = Integer.parseInt(idText);
                 if (habitDAO.markHabitDone(id, LocalDate.now())) {
-                    setOutput("<p style='color:green;'>✅ Habit marked as done!</p>");
+                    setOutput("<p style='color:green;'> Habit marked as done!</p>");
                     habitIdField.setText("");
                 } else {
-                    setOutput("<p style='color:red;'>❌ No habit found with that ID.</p>");
+                    setOutput("<p style='color:red;'>No habit found with that ID.</p>");
                 }
             } catch (NumberFormatException ex) {
                 setOutput("<p style='color:orange;'>⚠ Please enter a valid number.</p>");

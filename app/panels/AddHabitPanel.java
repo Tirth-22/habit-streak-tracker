@@ -22,11 +22,11 @@ public class AddHabitPanel extends JPanel {
 
         JPanel formPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
         formPanel.add(new JLabel("Habit Name:"));
-        nameField = new JTextField(15); // fixed width field
+        nameField = new JTextField(15); 
         formPanel.add(nameField);
 
         JButton addBtn = new JButton("Add Habit");
-        addBtn.setPreferredSize(new Dimension(120, 30)); // make button smaller
+        addBtn.setPreferredSize(new Dimension(120, 30)); 
         formPanel.add(addBtn);
 
         add(formPanel, BorderLayout.CENTER);
@@ -40,10 +40,10 @@ public class AddHabitPanel extends JPanel {
             String name = nameField.getText().trim();
             if (!name.isEmpty()) {
                 if (habitDAO.insertHabit(new Habit(name, LocalDate.now()))) {
-                    setOutput("<p style='color:green;'>✅ Habit added!</p>");
+                    setOutput("<p style='color:green;'>Habit added!</p>");
                     nameField.setText("");
                 } else {
-                    setOutput("<p style='color:red;'>❌ Error adding habit.</p>");
+                    setOutput("<p style='color:red;'>Error adding habit.</p>");
                 }
             } else {
                 setOutput("<p style='color:orange;'>⚠ Please enter a habit name.</p>");
