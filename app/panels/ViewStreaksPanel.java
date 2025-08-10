@@ -15,7 +15,7 @@ public class ViewStreaksPanel extends JPanel {
         setLayout(new BorderLayout(10, 10));
         setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 
-        JLabel title = new JLabel("🔥 View Streaks");
+        JLabel title = new JLabel("View Streaks");
         title.setFont(new Font("Segoe UI", Font.BOLD, 18));
         add(title, BorderLayout.NORTH);
 
@@ -28,7 +28,7 @@ public class ViewStreaksPanel extends JPanel {
     }
 
     public void refresh() {
-        StringBuilder sb = new StringBuilder("<h3>🔥 Streaks</h3><ul>");
+        StringBuilder sb = new StringBuilder("<h3>Streaks</h3><ul>");
         for (Habit h : habitDAO.getAllHabits()) {
             int streak = logDAO.calculateStreak(h.getId());
             sb.append("<li>").append(h.getName()).append(" ➤ <b style='color:orange;'>")
